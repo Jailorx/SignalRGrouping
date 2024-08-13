@@ -1,7 +1,12 @@
+using SignalRGrouping.Hubs;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Add signalR
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -23,5 +28,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapHub<HouseGroupHub>("/hub/houseGroup");
 
 app.Run();
